@@ -1,11 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Event Registration System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Conf 2026 - Event Registration</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/images/favicon-32x32.png" type="image/png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400..800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    
+  <a class="skip-link" href="#main">Skip to main page</a>
+
+  <header class="site-header">
+    <a href="index.html">
+      <img src="../assets/images/logo-full.svg" alt="Coding Conf, home">
+    </a>
+  </header>
+
+  <main id="main">
+    <section class="hero-section" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Your Journey to Coding Conf 2026 Starts Here</h1>
+      <p>Secure your spot at next year's biggest coding conference.</p>
+    </section>
+
+    <section class="registration-section" aria-labelledby="form-heading">
+      <h2 id="form-heading">Attendee Registration</h2>
+      
+      <form id="registration-form" action="ticket.html" method="GET" novalidate>
+        <!-- Avatar Upload -->
+        <div class="form-group">
+          <label id="avatar-label" for="avatar-upload">Upload Avatar</label>
+          <p id="avatar-hint" class="hint">Upload your photo (JPG or PNG, max size: 500KB).</p>
+          <input 
+            type="file" 
+            id="avatar-upload" 
+            name="avatar" 
+            accept="image/png, image/jpeg" 
+            aria-labelledby="avatar-label" 
+            aria-describedby="avatar-hint"
+          >
+        </div>
+
+        <!-- Full Name  -->
+        <div class="form-group">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="fullName" required placeholder="e.g. Sabrina Farquharson">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="jane.doe@email.com">
+        </div>
+
+        <!-- GitHub Username  -->
+        <div class="form-group">
+          <label for="github-username">GitHub Username</label>
+          <input type="text" id="github-username" name="githubUsername" required placeholder="@yourusername">
+        </div>
+
+        <button type="submit" class="btn-submit">Generate My Ticket</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Coding Conf. Sabrina's project.</p>
+  </footer>
+
+  <script src="../js/validation.js" defer></script>
 </body>
 </html>

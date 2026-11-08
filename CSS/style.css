@@ -1,0 +1,364 @@
+/* 1. Variables & Theme */
+:root {
+  /* Colors */
+  --color-neutral-0: hsl(0, 0%, 100%);
+  --color-neutral-300: hsl(252, 6%, 83%);
+  --color-neutral-500: hsl(245, 15%, 58%);
+  --color-neutral-700: hsl(245, 19%, 35%);
+  --color-neutral-900: hsl(248, 70%, 10%);
+
+  --color-orange-500: hsl(7, 88%, 67%);
+  --color-orange-700: hsl(7, 71%, 60%);
+
+  /* Gradients */
+  --gradient-text: linear-gradient(135deg, hsl(7, 86%, 67%), hsl(0, 0%, 100%));
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+
+  /* Typography */
+  --font-family: 'Inconsolata', monospace;
+  --font-size-label: 20px;
+  --font-size-body: 18px;
+  --font-size-small: 14px;
+  --font-size-h1: 2.25rem;
+  --font-size-h2: 1.5rem;
+
+  /* Spacing & Borders */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --transition-fast: 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-h1: 3.5rem;
+    --font-size-h2: 2rem;
+  }
+}
+
+/* 2. Reset & Base styles*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-0);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(7, 88, 67, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(245, 15, 58, 0.1) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Accessible Focus Ring */
+:focus-visible {
+  outline: 3px solid var(--color-orange-500);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--color-orange-500);
+  color: var(--color-neutral-900);
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  z-index: 1000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/*3. Overall Layout  */
+.site-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.site-header img {
+  height: 32px;
+}
+
+#main {
+  flex: 1;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-500);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 4. Typo. & Headings */
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--color-neutral-0);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  color: var(--color-neutral-300);
+}
+
+.hero-section, 
+.confirmation-section, 
+.login-section {
+  text-align: center;
+}
+
+.hero-section p, 
+.confirmation-section p, 
+.login-section p {
+  font-size: 1.25rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Forms and Inputs */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  color: var(--color-neutral-0);
+}
+
+.hint {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-500);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-neutral-500);
+  border-radius: var(--radius-md);
+  color: var(--color-neutral-0);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="file"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-neutral-300);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder {
+  color: var(--color-neutral-500);
+}
+
+/* Custom File Upload Styling */
+input[type="file"] {
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  background: var(--color-neutral-700);
+  color: var(--color-neutral-0);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  margin-right: 1rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: var(--color-neutral-500);
+}
+
+/* Buttons */
+.btn-submit {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  background-color: var(--color-orange-500);
+  color: var(--color-neutral-900);
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 800;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform 0.1s ease;
+}
+
+.btn-submit:hover {
+  background-color: var(--color-orange-700);
+}
+
+.btn-submit:active {
+  transform: scale(0.99);
+}
+
+/* 6. Ticket card */
+.ticket-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 2rem;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.ticket-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ticket-header img {
+  width: 38px;
+  height: 38px;
+}
+
+.ticket-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ticket-header p {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-500);
+}
+
+.ticket-user-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid var(--color-neutral-500);
+}
+
+.user-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-neutral-0);
+}
+
+.user-github {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-300);
+}
+
+.ticket-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ticket-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-neutral-500);
+  letter-spacing: 0.1em;
+}
+
+/*7. Media responsiveness */
+@media (max-width: 375px) {
+  #main {
+    padding: 1rem;
+  }
+  
+  .ticket-card {
+    padding: 1.25rem;
+  }
+}
