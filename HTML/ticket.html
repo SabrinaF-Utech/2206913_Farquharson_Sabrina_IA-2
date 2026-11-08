@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dynamic Event Registration System Login Page</title> <!page title
-<link rel="icon" href="../assets/images/favicon-32x32.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400..800&display=swap" rel="stylesheet"> <! google fonts
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Coding Conf 2026</title>
+  
+  <link rel="icon" href="../assets/images/favicon-32x32.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to main page</a>
-<header class="site-header">
-<a href="index.html"><img src="../assets/images/logo-full.svg" alt="Coding Conf, home"></a>
-</header>
-<main id="main">
-<!-- page content -->
-</main>
-<footer class="site-footer"><p>&copy; 2026 Coding Conf. Sabrina's project.</p></footer>
-<script src="../js/validation.js" defer></script> <!-- ticket.js on ticket.html -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <a href="index.html">
+      <img src="../assets/images/logo-full.svg" alt="Coding Conf, home">
+    </a>
+    <nav aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="login.html">Register</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="success" aria-labelledby="success-title">
+      <h1 id="success-title">
+        Congrats, <span id="ticket-name" class="highlight"></span>! Your ticket is ready.
+      </h1>
+      <p>
+        We've emailed your ticket to <span id="ticket-email" class="highlight"></span> and will send updates in the run up to the event.
+      </p>
+    </section>
+
+    <article class="ticket" aria-label="Your Coding Conf ticket">
+      <div class="ticket-main">
+        <img class="ticket-logo" src="../assets/images/logo-full.svg" alt="Coding Conf">
+        <p class="ticket-meta"><time datetime="2026-10-26">Oct 26, 2026</time> / Papine, Kgn</p>
+        <div class="ticket-person">
+          <img id="ticket-avatar" class="ticket-avatar" src="../assets/images/image-avatar.jpg" alt="Attendee photo">
+          <div>
+            <h2 id="ticket-fullname" class="ticket-fullname">Attendee name</h2>
+            <a id="ticket-github" class="ticket-github" href="#" target="_blank" rel="noopener noreferrer">@username</a>
+          </div>
+        </div>
+      </div>
+      <p id="ticket-serial" class="ticket-serial">#00000</p>
+    </article>
+
+    <button type="button" id="register-another" class="btn-small">Register another person</button>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Coding Conf. Sabrina's project.</p>
+  </footer>
+
+  <script src="../js/ticket.js" defer></script>
 </body>
 </html>

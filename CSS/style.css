@@ -1,62 +1,51 @@
-/* 1. Variables & Theme */
+/* Coding Conf - Main Stylesheet (CIT2011 IA#2)
+   Author: Sabrina Farquharson */
+
 :root {
-  /* Colors */
-  --color-neutral-0: hsl(0, 0%, 100%);
-  --color-neutral-300: hsl(252, 6%, 83%);
-  --color-neutral-500: hsl(245, 15%, 58%);
-  --color-neutral-700: hsl(245, 19%, 35%);
-  --color-neutral-900: hsl(248, 70%, 10%);
+  --neutral-0: hsl(0 0% 100%);
+  --neutral-300: hsl(252 6% 83%);
+  --neutral-500: hsl(245 15% 58%);
+  --neutral-700: hsl(245 19% 35%);
+  --neutral-900: hsl(248 70% 10%);
+  
+  --orange-500: hsl(7 88% 67%);
+  --orange-700: hsl(7 71% 60%);
 
-  --color-orange-500: hsl(7, 88%, 67%);
-  --color-orange-700: hsl(7, 71%, 60%);
+  /* Glass tokens */
+  --glass-bg: hsl(0 0% 100% / 0.12);
+  --glass-bg-hover: hsl(0 0% 100% / 0.2);
+  --glass-border: hsl(0 0% 100% / 0.45);
 
-  /* Gradients */
-  --gradient-text: linear-gradient(135deg, hsl(7, 86%, 67%), hsl(0, 0%, 100%));
-  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-
-  /* Typography */
-  --font-family: 'Inconsolata', monospace;
-  --font-size-label: 20px;
-  --font-size-body: 18px;
-  --font-size-small: 14px;
-  --font-size-h1: 2.25rem;
-  --font-size-h2: 1.5rem;
-
-  /* Spacing & Borders */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --transition-fast: 0.2s ease-in-out;
+  --font-main: "Inconsolata", monospace;
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+  --text-heading: clamp(1.9rem, 1.2rem + 3.4vw, 3.5rem);
+  --radius: 0.75rem;
 }
 
-@media (min-width: 768px) {
-  :root {
-    --font-size-h1: 3.5rem;
-    --font-size-h2: 2rem;
-  }
-}
-
-/* 2. Reset & Base styles*/
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+:where(h1, h2, h3, p, dl, dd, figure) {
   margin: 0;
-  padding: 0;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 body {
   min-height: 100vh;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-0);
-  font-family: var(--font-family);
-  font-size: var(--font-size-body);
-  line-height: 1.5;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(7, 88, 67, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(245, 15, 58, 0.1) 0%, transparent 40%);
-  background-attachment: fixed;
+  font-family: var(--font-main);
+  font-size: var(--text-body);
+  color: var(--neutral-0);
+  background-color: var(--neutral-900);
+  overflow-x: clip;
 }
 
 img {
@@ -65,300 +54,430 @@ img {
   display: block;
 }
 
-/* Accessible Focus Ring */
-:focus-visible {
-  outline: 3px solid var(--color-orange-500);
-  outline-offset: 3px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Skip Link */
 .skip-link {
   position: absolute;
-  top: -100px;
+  top: -4rem;
   left: 1rem;
-  background: var(--color-orange-500);
-  color: var(--color-neutral-900);
-  padding: 0.75rem 1.25rem;
-  font-weight: 700;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
   z-index: 1000;
-  transition: top var(--transition-fast);
+  padding: 0.75rem 1.25rem;
+  background: var(--neutral-0);
+  color: var(--neutral-900);
+  font-weight: 700;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.2s ease;
 }
 
 .skip-link:focus {
   top: 1rem;
 }
 
-/*3. Overall Layout  */
 .site-header {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 1.5rem;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1.5rem;
 }
 
 .site-header img {
-  height: 32px;
+  height: 2.25rem;
+  width: auto;
 }
 
-#main {
+.site-header nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-header nav a:not([aria-current="page"]) {
+  color: var(--neutral-300);
+  text-decoration: none;
+}
+
+.site-header nav a[aria-current="page"] {
+  color: var(--neutral-0);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+main {
   flex: 1;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  width: min(100% - 2rem, 62rem);
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2.5rem;
+  padding-bottom: 3rem;
 }
 
 .site-footer {
+  padding: 1.5rem;
   text-align: center;
-  padding: 2rem 1.5rem;
-  font-size: var(--font-size-small);
-  color: var(--color-neutral-500);
+  font-size: 0.9rem;
+  color: var(--neutral-300);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* 4. Typo. & Headings */
-h1 {
-  font-size: var(--font-size-h1);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  text-align: center;
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: var(--font-size-h2);
-  font-weight: 700;
-  color: var(--color-neutral-0);
-  margin-bottom: 1.5rem;
-}
-
-p {
-  color: var(--color-neutral-300);
-}
-
-.hero-section, 
-.confirmation-section, 
-.login-section {
-  text-align: center;
-}
-
-.hero-section p, 
-.confirmation-section p, 
-.login-section p {
+/* Buttons */
+.btn {
+  display: inline-block;
+  min-height: 2.75rem;
+  width: 100%;
+  padding: 0.9rem 1.75rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--orange-500);
+  color: var(--neutral-900);
+  font: inherit;
   font-size: 1.25rem;
-  max-width: 540px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:not(:disabled):hover {
+  background: var(--orange-700);
+  transform: translateY(-2px);
+}
+
+.btn-small {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+  color: var(--neutral-0);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-small:hover {
+  background: var(--glass-bg-hover);
+}
+
+/* Hero & Intro Layouts */
+.hero, .intro {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.hero h1, .intro h1 {
+  font-size: var(--text-heading);
+  font-weight: 800;
+}
+
+.tagline, .subtitle {
+  color: var(--neutral-300);
+  font-size: 1.1rem;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-/* Forms and Inputs */
-form {
+/* Event Details Section */
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 35rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+  text-align: center;
+}
+
+.card dt {
+  color: var(--neutral-300);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.card dd {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  max-width: 42rem;
+  color: var(--neutral-300);
+}
+
+.overview h2 {
+  color: var(--neutral-0);
+}
+
+.float-media {
+  width: 3rem;
+  margin: 0 auto;
+}
+
+/* Form Styles */
+.form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  text-align: left;
+  width: min(100% - 2rem, 30rem);
+  margin-inline: auto;
 }
 
-.form-group {
+.field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-label {
-  font-size: var(--font-size-label);
+.field label {
+  font-size: 20px;
   font-weight: 500;
-  color: var(--color-neutral-0);
+}
+
+.field :is(input[type="text"], input[type="email"]) {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--neutral-500);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+  color: var(--neutral-0);
+  font: inherit;
+  font-size: var(--text-body);
+}
+
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 8.5rem;
+  padding: 1rem;
+  border: 2px dashed var(--neutral-500);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone--filled input[type="file"] {
+  pointer-events: none;
+}
+
+.avatar-preview {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 2px solid var(--neutral-500);
 }
 
 .hint {
-  font-size: var(--font-size-small);
-  color: var(--color-neutral-500);
+  font-size: 0.85rem;
+  color: var(--neutral-300);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="file"] {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--color-neutral-500);
-  border-radius: var(--radius-md);
-  color: var(--color-neutral-0);
-  font-family: var(--font-family);
-  font-size: var(--font-size-body);
-  transition: border-color var(--transition-fast), background-color var(--transition-fast);
-}
+/* Ticket Card & Success Layout */
 
-input[type="text"]:hover,
-input[type="email"]:hover,
-input[type="file"]:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-neutral-300);
-}
-
-input[type="text"]::placeholder,
-input[type="email"]::placeholder {
-  color: var(--color-neutral-500);
-}
-
-/* Custom File Upload Styling */
-input[type="file"] {
-  cursor: pointer;
-}
-
-input[type="file"]::file-selector-button {
-  background: var(--color-neutral-700);
-  color: var(--color-neutral-0);
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-sm);
-  margin-right: 1rem;
-  font-family: var(--font-family);
-  cursor: pointer;
-  transition: background var(--transition-fast);
-}
-
-input[type="file"]::file-selector-button:hover {
-  background: var(--color-neutral-500);
-}
-
-/* Buttons */
-.btn-submit {
-  width: 100%;
-  padding: 1rem;
-  margin-top: 0.5rem;
-  background-color: var(--color-orange-500);
-  color: var(--color-neutral-900);
-  font-family: var(--font-family);
-  font-size: 1.25rem;
-  font-weight: 800;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background-color var(--transition-fast), transform 0.1s ease;
-}
-
-.btn-submit:hover {
-  background-color: var(--color-orange-700);
-}
-
-.btn-submit:active {
-  transform: scale(0.99);
-}
-
-/* 6. Ticket card */
-.ticket-wrapper {
+/* Success message section wrapper */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
   margin-top: 1rem;
-  display: flex;
-  justify-content: center;
 }
 
-.ticket-card {
-  width: 100%;
-  max-width: 500px;
-  background: var(--gradient-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 2rem;
-  display: grid;
-  grid-template-rows: auto auto auto;
-  gap: 2rem;
+.success h1 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+}
+
+.success p {
+  color: var(--neutral-300);
+  font-size: 1.1rem;
+  max-width: 400px;
+}
+
+.highlight {
+  color: var(--orange-500);
+}
+
+/* The Ticket Container */
+.ticket {
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  display: grid;
+  grid-template-columns: 81fr 19fr;
+  width: min(100% - 1.5rem, 37.5rem);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  margin: 1rem auto;
 }
 
-.ticket-header {
+/* Semicircular notches on the divider edge */
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  left: 81%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  background: var(--neutral-900);
+}
+
+.ticket::before {
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.ticket::after {
+  bottom: 0;
+  transform: translate(-50%, 50%);
+}
+
+/* Main inner content of the ticket */
+.ticket-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 2rem;
+}
+
+.ticket-logo {
+  height: 24px;
+  width: auto;
+}
+
+.ticket-meta {
+  color: var(--neutral-300);
+  font-size: 0.95rem;
+  margin-top: -1.5rem;
+}
+
+.ticket-person {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.ticket-header img {
-  width: 38px;
-  height: 38px;
-}
-
-.ticket-header h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.ticket-header p {
-  font-size: var(--font-size-small);
-  color: var(--color-neutral-500);
-}
-
-.ticket-user-details {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.user-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
+.ticket-avatar {
+  width: 4rem;
+  height: 4rem;
   object-fit: cover;
-  border: 2px solid var(--color-neutral-500);
+  border-radius: 0.75rem;
+  border: 1px solid var(--neutral-500);
 }
 
-.user-name {
+.ticket-fullname {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-neutral-0);
+  color: var(--neutral-0);
 }
 
-.user-github {
-  font-size: var(--font-size-small);
-  color: var(--color-neutral-300);
+.ticket-github {
+  color: var(--neutral-300);
+  font-size: 0.95rem;
+  text-decoration: none;
 }
 
-.ticket-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.ticket-github:hover {
+  color: var(--orange-500);
 }
 
-.ticket-number {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-neutral-500);
-  letter-spacing: 0.1em;
+/* Right-side Stub with Vertical Serial Number */
+.ticket-serial {
+  display: grid;
+  place-items: center;
+  border-left: 2px dashed var(--glass-border);
+  writing-mode: vertical-rl;
+  color: var(--neutral-300);
+  letter-spacing: 0.15em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1rem 0;
 }
 
-/*7. Media responsiveness */
-@media (max-width: 375px) {
-  #main {
-    padding: 1rem;
-  }
-  
-  .ticket-card {
-    padding: 1.25rem;
-  }
+.noscript {
+  text-align: center;
+  color: var(--orange-500);
+  margin-top: 2rem;
+}
+
+/*Background Patterns (Global) */
+
+body {
+  position: relative;
+  /* Adds the main background image (e.g., desktop/tablet/mobile background) */
+  background-image: url('../assets/images/background-desktop.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*pattern overlay layer */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Combines pattern in the background */
+  background-image: 
+    url('../assets/images/pattern-lines.svg'),
+    url('../assets/images/pattern-circle.svg'),
+    url('../assets/images/pattern-squiggly-line-top.svg'),
+    url('../assets/images/pattern-squiggly-line-bottom.svg');
+  /* Positioned lines top-left, circle bottom-left, squiggly top-right, squiggly bottom-right */
+  background-position: top left, bottom left, top right, bottom right;
+  /* Makes vertical lines span 100% width and stop a quarter-way down (25% height) */
+  background-size: 100% 25%, auto, auto, auto;
+  /* Repeats lines horizontally across the page */
+  background-repeat: repeat-x, no-repeat, no-repeat, no-repeat;
+  pointer-events: none; /* Ensures users can still click forms and buttons even with the pattern */
+  z-index: -1; /* Pushes the patterns behind content */
 }
